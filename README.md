@@ -1,101 +1,40 @@
-# Kindle to Obsidian Converter
+# Kindle Notes to Obsidian Converter
 
-Скрипт для конвертации заметок и выделений из Kindle в формат заметок Obsidian (Markdown).
+A simple Python script to convert your Kindle highlights and notes into Obsidian-friendly Markdown files.
 
-## Описание
+## How to Use
 
-Этот Python-скрипт автоматически преобразует экспортированные заметки и выделения из Amazon Kindle в структурированные markdown-файлы, готовые для импорта в Obsidian или любое другое приложение, поддерживающее Markdown.
+1.  **Export your notes:** Get your notes from your Kindle device. This is usually a file named `My Clippings.txt`.
+2.  **Place the file:** Put your `My Clippings.txt` file in the same directory as the script, and rename it to `kindle_highlights.txt`.
+3.  **Run the script:**
+    ```bash
+    python main.py
+    ```
+4.  **Find your notes:** The script will create a new folder called `obsidian_notes` with your notes converted to Markdown files.
 
-## Возможности
+## Example
 
-- ✅ Парсинг заметок и выделений из текстового экспорта Kindle
-- ✅ Автоматическая группировка по книгам
-- ✅ Извлечение метаданных (автор, дата, местоположение)
-- ✅ Создание отдельных MD-файлов для каждой книги
-- ✅ Frontmatter для интеграции с Obsidian
-- ✅ Разделение заметок, выделений и закладок
-- ✅ Создание индекса всех книг
-
-## Требования
-
-```bash
-Python 3.7+
-```
-
-Дополнительные библиотеки не требуются (используются только стандартные модули).
-
-## Установка
-
-```bash
-git clone https://github.com/yourusername/kindle-to-obsidian.git
-cd kindle-to-obsidian
-```
-
-## Использование
-
-### 1. Экспорт заметок из Kindle
-
-Скопируйте ваши заметки из файла `My Clippings.txt` на устройстве Kindle или используйте экспорт из приложения Kindle.
-
-### 2. Запуск скрипта
-
-```bash
-python kindle_to_obsidian.py
-```
-
-По умолчанию скрипт ищет файл `kindle_highlights.txt` и создает папку `obsidian_notes` с результатами.
-
-### 3. Настройка параметров
-
-```python
-# В конце файла измените:
-input_file = "my_kindle_notes.txt"  # Ваш файл
-output_dir = "my_notes"              # Ваша папка
-```
-
-## Примеры
-
-### Входные данные
-
-Пример формата экспорта Kindle (`kindle_highlights.txt`):
+### Input (`kindle_highlights.txt`)
 
 ```
-Психокибернетика (Максуэлл Мольц)
-– Ваш выделенный отрывок в месте 617–619 | Добавлено: вторник, 4 марта 2025 г. в 17:28:36
+Psychocybernetics (Maxwell Maltz)
+- Your Highlight at location 617-619 | Added on Tuesday, March 4, 2025 5:28:36 PM
 
-Цели нашего творческого механизма – это ПСИХОЛОГИЧЕСКИЕ ОБРАЗЫ или мысленные картинки, созданные нами посредством ВООБРАЖЕНИЯ.
-==========
-Психокибернетика (Максуэлл Мольц)
-– Ваша заметка в месте 619 | Добавлено: вторник, 4 марта 2025 г. в 17:29:10
-
-Это действительно важная мысль для понимания работы мозга.
+The goals of our creative mechanism are PSYCHOLOGICAL IMAGES or mental pictures, which we create through IMAGINATION.
 ==========
 Building a Second Brain (Tiago Forte)
-– Ваш выделенный отрывок на странице 42 | Место 550–551 | Добавлено: понедельник, 16 июня 2025 г. в 00:30:51
+- Your Highlight on page 42 | Location 550-551 | Added on Monday, June 16, 2025 12:30:51 AM
 
 To guide you in the process of creating your own Second Brain, I've developed a simple, intuitive four-part method called "CODE"—Capture; Organize; Distill; Express.
 ==========
 ```
 
-### Выходные данные
-
-#### Структура папок
-
-```
-obsidian_notes/
-├── 00_Индекс_книг.md
-├── Психокибернетика.md
-├── Building a Second Brain.md
-├── Цифровой минимализм.md
-└── Can't Hurt Me.md
-```
-
-#### Пример файла (`Психокибернетика.md`)
+### Output (`obsidian_notes/Psychocybernetics.md`)
 
 ```markdown
 ---
-title: Психокибернетика
-author: Максуэлл Мольц
+title: Psychocybernetics
+author: Maxwell Maltz
 type: book
 tags: 
   - book
@@ -103,127 +42,18 @@ tags:
 date: 2025-10-01
 ---
 
-# Психокибернетика
+# Psychocybernetics
 
-**Автор:** Максуэлл Мольц
-
----
-
-## Заметки и выделения
-
-### 📌 Выделение #1
-
-**Местоположение:** 617–619  
-**Дата:** вторник, 4 марта 2025 г. в 17:28:36
-
-> Цели нашего творческого механизма – это ПСИХОЛОГИЧЕСКИЕ ОБРАЗЫ или мысленные картинки, созданные нами посредством ВООБРАЖЕНИЯ.
+**Author:** Maxwell Maltz
 
 ---
 
-### 💭 Заметка #2
+## Notes and Highlights
 
-**Местоположение:** 619  
-**Дата:** вторник, 4 марта 2025 г. в 17:29:10
+### 📌 Highlight #1
 
-> Это действительно важная мысль для понимания работы мозга.
+**Location:** 617-619
+**Date:** Tuesday, March 4, 2025 5:28:36 PM
 
----
+> The goals of our creative mechanism are PSYCHOLOGICAL IMAGES or mental pictures, which we create through IMAGINATION.
 ```
-
-#### Пример индекса (`00_Индекс_книг.md`)
-
-```markdown
----
-title: Библиотека книг
-type: index
-tags: [books, index]
----
-
-# 📚 Моя библиотека
-
-- [[Building a Second Brain|Building a Second Brain]] - *Tiago Forte* (145 записей)
-- [[Can't Hurt Me|Can't Hurt Me]] - *David Goggins* (89 записей)
-- [[Психокибернетика|Психокибернетика]] - *Максуэлл Мольц* (234 записи)
-- [[Цифровой минимализм|Цифровой минимализм]] - *Кэл Ньюпорт* (112 записей)
-```
-
-## Особенности реализации
-
-### Типы записей
-
-Скрипт автоматически определяет тип записи:
-
-- 📌 **Выделение** - текст, выделенный в книге
-- 💭 **Заметка** - ваши личные комментарии
-- 🔖 **Закладка** - сохраненные страницы
-- 📝 **Запись** - прочие типы
-
-### Извлекаемые метаданные
-
-- Название книги
-- Автор
-- Местоположение (страница или location)
-- Дата добавления
-- Тип записи
-
-### Безопасность имен файлов
-
-Скрипт автоматически очищает названия книг от недопустимых символов для имен файлов и ограничивает длину до 100 символов.
-
-## Дополнительные функции
-
-### Создание индекса
-
-Добавьте в `main()` после цикла обработки:
-
-```python
-# Создаем индекс всех книг
-create_index(books, output_dir)
-```
-
-### Настройка поведения
-
-```python
-CONFIG = {
-    'group_by_date': False,    # Группировать по датам
-    'add_backlinks': True,     # Добавлять обратные ссылки
-    'language': 'ru',          # Язык интерфейса
-    'use_emoji': True,         # Использовать эмодзи
-    'max_filename_length': 100 # Макс. длина имени файла
-}
-```
-
-## Интеграция с Obsidian
-
-После генерации файлов:
-
-1. Скопируйте папку `obsidian_notes` в ваше хранилище Obsidian
-2. Файлы автоматически появятся в графе связей
-3. Используйте теги для фильтрации: `tag:#book`
-4. Создавайте связи между заметками через `[[...]]`
-
-## Поддерживаемые форматы
-
-- Экспорт из устройств Kindle (My Clippings.txt)
-- Экспорт из приложения Kindle для iOS/Android
-- Экспорт из Kindle для PC/Mac
-
-## Ограничения
-
-- Скрипт работает с текстовым экспортом, не с файлами .azw или .mobi
-- Поддерживаются русский и английский языки
-- Требуется корректный формат экспорта Kindle
-
-## Решение проблем
-
-**Проблема:** Не все книги обработаны
-
-**Решение:** Проверьте формат файла, убедитесь что записи разделены строкой `==========`
-
-**Проблема:** Кириллица отображается некорректно
-
-**Решение:** Убедитесь что файл сохранен в кодировке UTF-8
-
-**Проблема:** Ошибка при создании файлов
-
-**Решение:** Проверьте права на запись в папку назначения
