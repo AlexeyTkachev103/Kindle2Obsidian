@@ -1,6 +1,6 @@
 # Kindle Notes to Obsidian Converter
 
-A simple Python script to convert your Kindle highlights and notes into Obsidian-friendly Markdown files.
+Python utility which convert Kindle highlights and notes into Obsidian-friendly Markdown files.
 
 ## How to Use
 
